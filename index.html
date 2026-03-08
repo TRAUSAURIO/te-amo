@@ -204,6 +204,17 @@
 
     .music-toggle:hover { transform: scale(1.2) rotate(15deg); background: var(--rose-vivo); color: white; }
 
+    #music-info {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 100;
+      font-size: 0.9rem;
+      color: var(--gold-suave);
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
     @media (max-width: 600px) {
       .title-ex { font-size: clamp(4rem, 18vw, 7.5rem); }
       .secret-poem { font-size: clamp(2.5rem, 10vw, 4.2rem); }
@@ -215,12 +226,13 @@
 
 <div id="particles"></div>
 
-<audio id="music" loop preload="auto">
-  <source src="https://cdn.pixabay.com/download/audio/2024/06/12/audio_9d6f8c1d9d.mp3?filename=romantic-piano-217042.mp3" type="audio/mpeg">
-  <!-- Puedes cambiar por otra más dramática si quieres: busca "cinematic piano love" en pixabay -->
-</audio>
+<!-- YouTube embed oculto para reproducir la playlist como fondo -->
+<iframe id="bg-music" width="0" height="0" 
+  src="https://www.youtube.com/embed/3N1Z2CBcXxo?autoplay=0&loop=1&playlist=3N1Z2CBcXxo&mute=0&enablejsapi=1" 
+  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-<div class="music-toggle" id="btn-music">♫</div>
+<div class="music-toggle" id="btn-music">♪</div>
+<div id="music-info">Música: Laufey Playlist (sped up vibes) ♡</div>
 
 <div class="container">
 
@@ -260,13 +272,38 @@
 </div>
 
 <script>
-// ── Observer para fade-in extravagante ───────
+// Control de música (YouTube Player API simple)
+const musicFrame = document.getElementById('bg-music');
+const btnMusic = document.getElementById('btn-music');
+let isPlaying = false;
+
+btnMusic.onclick = () => {
+  if (isPlaying) {
+    musicFrame.src = musicFrame.src.replace('autoplay=1', 'autoplay=0');
+    btnMusic.textContent = '♪';
+  } else {
+    musicFrame.src = musicFrame.src.replace('autoplay=0', 'autoplay=1');
+    btnMusic.textContent = '❚❚';
+  }
+  isPlaying = !isPlaying;
+};
+
+// Para forzar loop y autoplay al cargar (navegadores pueden bloquear autoplay sin interacción)
+window.addEventListener('click', () => {
+  if (!isPlaying) {
+    musicFrame.src = musicFrame.src.replace('autoplay=0', 'autoplay=1');
+    isPlaying = true;
+    btnMusic.textContent = '❚❚';
+  }
+}, { once: true });
+
+// ── Observer para fade-in ───────
 const obs = new IntersectionObserver(ents => {
   ents.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
 }, {threshold: 0.15});
 document.querySelectorAll("section").forEach(el => obs.observe(el));
 
-// ── Typewriter más poético y lento ───────────
+// ── Typewriter ───────────
 const poema = 
 `Hoy celebro a la mujer que hace temblar mi mundo con solo mirarme.\n
 Eres fuerza disfrazada de ternura, coraje envuelto en caricias.\n
@@ -290,7 +327,7 @@ const obsLetter = new IntersectionObserver(([e]) => {
 }, {threshold: 0.5});
 obsLetter.observe(document.getElementById("letter"));
 
-// ── Reveal + explosión masiva de partículas ──
+// ── Reveal + explosión ──
 document.getElementById("btn-reveal").onclick = e => {
   document.getElementById("secret-text").classList.add("show");
 
@@ -317,7 +354,7 @@ document.getElementById("btn-reveal").onclick = e => {
   }
 };
 
-// ── Partículas extravagantes ─────────────────
+// ── Partículas ─────────────────
 const cont = document.getElementById("particles");
 
 function spawn(type) {
@@ -355,16 +392,6 @@ setInterval(() => spawn("heart"), 280);
 setInterval(() => spawn("petal"), 450);
 setInterval(() => spawn("star"),  1200);
 setInterval(() => spawn("glow"),  3000);
-
-// ── Música toggle ────────────────────────────
-const btn = document.getElementById("btn-music");
-const aud = document.getElementById("music");
-let on = false;
-btn.onclick = () => {
-  if (on) { aud.pause(); btn.textContent = "♫"; }
-  else { aud.play().catch(()=>{}); btn.textContent = "❚❚"; }
-  on = !on;
-};
 </script>
 </body>
 </html>
