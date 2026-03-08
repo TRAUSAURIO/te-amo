@@ -1,1 +1,370 @@
-# te-amo
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Ti, Mujer Extraordinaria – 8 de Marzo 2026</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Dancing+Script:wght@700&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #0a0012;
+      --bg-rose: #2a0e1f;
+      --rose-vivo: #ff3366;
+      --rose-suave: #ff6699;
+      --gold-brillo: #ffd700;
+      --gold-suave: #ffeb99;
+      --text-luz: #fff0f5;
+      --text-morado: #e6ccff;
+
+      --font-script: 'Great Vibes', cursive;
+      --font-dance: 'Dancing Script', cursive;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Roboto', sans-serif;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      background: radial-gradient(circle at 30% 20%, #3a1a2f 0%, #0a0012 60%);
+      color: var(--text-luz);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 70% 80%, rgba(255,51,102,0.12) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 1;
+      animation: pulse-bg 18s infinite alternate;
+    }
+
+    @keyframes pulse-bg {
+      0% { opacity: 0.4; transform: scale(1); }
+      100% { opacity: 0.7; transform: scale(1.15); }
+    }
+
+    #particles { position:fixed; inset:0; pointer-events:none; z-index:0; }
+
+    .heart, .petal, .star, .glow {
+      position: absolute;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    .heart { color: var(--rose-vivo); font-size: 1.4rem; animation: rise-ex  linear forwards; text-shadow: 0 0 12px var(--rose-vivo); }
+    .petal  { color: var(--rose-suave); font-size: 1.8rem; animation: drift-ex linear forwards; }
+    .star   { color: var(--gold-brillo); font-size: 1.2rem; animation: shoot linear forwards; opacity: 0.9; }
+    .glow   { background: radial-gradient(circle, rgba(255,230,153,0.6) 10%, transparent 70%); border-radius:50%; animation: glow-pulse 4s infinite; pointer-events:none; }
+
+    @keyframes rise-ex   { 0% { transform:translateY(0) rotate(0deg) scale(0.5); opacity:0; } 15%{opacity:0.9;} 100% { transform:translateY(-140vh) rotate(1080deg) scale(1.2); opacity:0; } }
+    @keyframes drift-ex  { 0% { transform:translate(0,0) rotate(0deg); opacity:0; } 12%{opacity:0.85;} 100% { transform:translate(calc(180px * var(--dx)), 140vh) rotate(calc(720deg * var(--rot))); opacity:0; } }
+    @keyframes shoot     { 0% { transform:translate(0,0) scale(1); opacity:1; } 100% { transform:translate(calc(400px * var(--sx)), calc(-400px * var(--sy))) scale(0.3); opacity:0; } }
+    @keyframes glow-pulse{ 0%,100% { transform:scale(1); opacity:0.5; } 50% { transform:scale(1.6); opacity:0.9; } }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 5vh 6vw;
+      position: relative;
+      z-index: 5;
+    }
+
+    section {
+      min-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(60px) scale(0.92);
+      transition: all 2s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .title-ex {
+      font-family: var(--font-dance);
+      font-size: clamp(5rem, 15vw, 10rem);
+      color: var(--rose-vivo);
+      text-shadow: 0 0 40px rgba(255,51,102,0.7), 0 0 80px rgba(255,51,102,0.4);
+      margin: 0.3em 0;
+      animation: shine 5s infinite alternate;
+    }
+
+    @keyframes shine {
+      0% { text-shadow: 0 0 30px var(--rose-vivo), 0 0 60px rgba(255,51,102,0.3); }
+      100% { text-shadow: 0 0 60px var(--rose-vivo), 0 0 120px rgba(255,51,102,0.6); }
+    }
+
+    .subtitle-gold {
+      font-family: var(--font-serif);
+      font-weight: 800;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--gold-brillo);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin: 1rem 0 2rem;
+      text-shadow: 0 0 25px var(--gold-brillo);
+    }
+
+    .typewriter {
+      font-family: var(--font-serif);
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      line-height: 1.75;
+      max-width: 42em;
+      color: #fff8fb;
+      white-space: pre-wrap;
+      border-right: 4px solid var(--gold-brillo);
+      padding-right: 6px;
+      animation: blink-cursor 1.2s step-end infinite;
+      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+    }
+
+    @keyframes blink-cursor { 50% { border-color: transparent; } }
+
+    .btn-magic {
+      margin: 3rem 0 2rem;
+      padding: 1.2rem 3.5rem;
+      font-family: var(--font-dance);
+      font-size: 2.2rem;
+      color: #0a0012;
+      background: linear-gradient(45deg, var(--gold-brillo), var(--gold-suave));
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 0 40px rgba(255,215,0,0.7);
+      transition: all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+    }
+
+    .btn-magic:hover {
+      transform: scale(1.15) rotate(3deg);
+      box-shadow: 0 0 80px rgba(255,215,0,1);
+      background: linear-gradient(45deg, #fffacd, var(--gold-brillo));
+    }
+
+    .secret-poem {
+      font-family: var(--font-script);
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      color: var(--rose-vivo);
+      opacity: 0;
+      transform: translateY(80px) scale(0.7);
+      transition: all 2.2s cubic-bezier(0.34,1.56,0.64,1);
+      max-width: 95%;
+      line-height: 1.2;
+      text-shadow: 0 0 35px rgba(255,51,102,0.8);
+    }
+
+    .secret-poem.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .final-glow {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      line-height: 1.7;
+      color: var(--text-morado);
+      max-width: 40em;
+      margin-top: 2em;
+      text-shadow: 0 0 20px rgba(230,204,255,0.6);
+    }
+
+    .music-toggle {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      z-index: 100;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(255,51,102,0.3), rgba(0,0,0,0.6));
+      border: 2px solid var(--gold-brillo);
+      color: var(--gold-brillo);
+      font-size: 1.8rem;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: all 0.4s;
+      box-shadow: 0 0 30px rgba(255,215,0,0.5);
+    }
+
+    .music-toggle:hover { transform: scale(1.2) rotate(15deg); background: var(--rose-vivo); color: white; }
+
+    @media (max-width: 600px) {
+      .title-ex { font-size: clamp(4rem, 18vw, 7.5rem); }
+      .secret-poem { font-size: clamp(2.5rem, 10vw, 4.2rem); }
+      .typewriter { font-size: 1.4rem; line-height: 1.6; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<audio id="music" loop preload="auto">
+  <source src="https://cdn.pixabay.com/download/audio/2024/06/12/audio_9d6f8c1d9d.mp3?filename=romantic-piano-217042.mp3" type="audio/mpeg">
+  <!-- Puedes cambiar por otra más dramática si quieres: busca "cinematic piano love" en pixabay -->
+</audio>
+
+<div class="music-toggle" id="btn-music">♫</div>
+
+<div class="container">
+
+  <section id="hero" class="visible">
+    <h1 class="title-ex">¡Mujer Maravillosa!</h1>
+    <h2 class="subtitle-gold">8 de Marzo 2026 – Día Internacional de la Mujer</h2>
+    <p style="font-size:1.4rem; opacity:0.9; margin-top:1rem;">Hoy el universo entero se inclina ante tu luz...</p>
+  </section>
+
+  <section id="letter">
+    <h2 class="subtitle-gold">Eres Mi Inspiración Eterna</h2>
+    <div class="typewriter" id="typed"></div>
+  </section>
+
+  <section id="secret">
+    <h2 class="subtitle-gold">Un Secreto Que Late Por Ti</h2>
+    <button class="btn-magic" id="btn-reveal">Toca si crees en el amor verdadero</button>
+    <div class="secret-poem" id="secret-text">
+      Eres la reina de mis sueños,<br>
+      la fuerza que mueve mis días,<br>
+      la poesía que nunca supe escribir...<br>
+      ¡Feliz Día de la Mujer, mi amor inmenso!
+    </div>
+  </section>
+
+  <section id="ending">
+    <h1 class="title-ex">Siempre Tuyo</h1>
+    <p class="final-glow">
+      “Tu valentía ilumina el mundo,<br>
+      tu sonrisa conquista galaxias,<br>
+      tu corazón es mi hogar favorito.<br><br>
+      Gracias por ser tan poderosa, tan tierna, tan tú.<br>
+      ¡Eres imparable, eres magia, eres todo!”
+    </p>
+  </section>
+
+</div>
+
+<script>
+// ── Observer para fade-in extravagante ───────
+const obs = new IntersectionObserver(ents => {
+  ents.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+}, {threshold: 0.15});
+document.querySelectorAll("section").forEach(el => obs.observe(el));
+
+// ── Typewriter más poético y lento ───────────
+const poema = 
+`Hoy celebro a la mujer que hace temblar mi mundo con solo mirarme.\n
+Eres fuerza disfrazada de ternura, coraje envuelto en caricias.\n
+Cada paso tuyo rompe cadenas invisibles, cada risa tuya enciende estrellas.\n
+Gracias por existir, por luchar, por amar con esa intensidad que me desarma.\n
+¡Eres la revolución más hermosa que he conocido!\n
+Feliz Día de la Mujer, mi reina, mi musa, mi todo. 💜✨`;
+
+const typed = document.getElementById("typed");
+let i = 0;
+function type() {
+  if (i < poema.length) {
+    typed.textContent += poema[i++];
+    setTimeout(type, 60 + Math.random()*40);
+  } else {
+    typed.style.borderRight = "none";
+  }
+}
+const obsLetter = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) { type(); obsLetter.disconnect(); }
+}, {threshold: 0.5});
+obsLetter.observe(document.getElementById("letter"));
+
+// ── Reveal + explosión masiva de partículas ──
+document.getElementById("btn-reveal").onclick = e => {
+  document.getElementById("secret-text").classList.add("show");
+
+  const rect = e.target.getBoundingClientRect();
+  const x = rect.left + rect.width/2;
+  const y = rect.top + rect.height/2;
+
+  for (let k = 0; k < 40; k++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = Math.random() > 0.3 ? "💖" : "❤️";
+    h.style.left = x + "px";
+    h.style.top  = y + "px";
+    h.style.fontSize = (18 + Math.random()*40) + "px";
+    document.body.appendChild(h);
+
+    const ang = Math.random() * Math.PI * 2;
+    const d   = 180 + Math.random() * 400;
+    setTimeout(() => {
+      h.style.transform = `translate(${Math.cos(ang)*d}px, ${Math.sin(ang)*d}px) scale(0.1) rotate(${Math.random()*720}deg)`;
+      h.style.opacity = 0;
+    }, 20);
+    setTimeout(() => h.remove(), 1800);
+  }
+};
+
+// ── Partículas extravagantes ─────────────────
+const cont = document.getElementById("particles");
+
+function spawn(type) {
+  const el = document.createElement("div");
+  el.className = type;
+  if (type === "heart") {
+    el.textContent = Math.random() > 0.4 ? "💞" : "💗";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (5 + Math.random()*8) + "s";
+  } else if (type === "petal") {
+    el.textContent = "✧";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.setProperty("--dx", (Math.random() > 0.5 ? 1 : -1) * (60 + Math.random()*200));
+    el.style.setProperty("--rot", Math.random() > 0.5 ? 3 : -3);
+    el.style.animationDuration = (7 + Math.random()*10) + "s";
+  } else if (type === "star") {
+    el.textContent = "✨";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.top  = Math.random()*40 + "vh";
+    el.style.setProperty("--sx", Math.random() > 0.5 ? 1 : -1);
+    el.style.setProperty("--sy", Math.random() > 0.5 ? 1 : -1);
+    el.style.animationDuration = (3 + Math.random()*4) + "s";
+  } else if (type === "glow") {
+    el.className = "glow";
+    el.style.left = Math.random()*100 + "vw";
+    el.style.top  = Math.random()*100 + "vh";
+    el.style.width = el.style.height = (80 + Math.random()*300) + "px";
+    el.style.animationDuration = (6 + Math.random()*8) + "s";
+  }
+  cont.appendChild(el);
+  setTimeout(() => el.remove(), 20000);
+}
+
+setInterval(() => spawn("heart"), 280);
+setInterval(() => spawn("petal"), 450);
+setInterval(() => spawn("star"),  1200);
+setInterval(() => spawn("glow"),  3000);
+
+// ── Música toggle ────────────────────────────
+const btn = document.getElementById("btn-music");
+const aud = document.getElementById("music");
+let on = false;
+btn.onclick = () => {
+  if (on) { aud.pause(); btn.textContent = "♫"; }
+  else { aud.play().catch(()=>{}); btn.textContent = "❚❚"; }
+  on = !on;
+};
+</script>
+</body>
+</html>
