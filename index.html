@@ -3,222 +3,230 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Para Ti, Mujer Extraordinaria – 8 de Marzo 2026</title>
+  <title>Mi Love Story – Para Ti, Mujer Eterna • 8 de Marzo</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Dancing+Script:wght@700&family=Roboto:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg-deep: #0a0012;
-      --bg-rose: #2a0e1f;
-      --rose-vivo: #ff3366;
-      --rose-suave: #ff6699;
-      --gold-brillo: #ffd700;
-      --gold-suave: #ffeb99;
-      --text-luz: #fff0f5;
-      --text-morado: #e6ccff;
+      --bg-deep: #0e001a;
+      --purple-dream: #2a0f3a;
+      --rose-soft: #c71585;
+      --rose-glow: #ff69b4;
+      --gold-magic: #d4af37;
+      --gold-light: #f0e68c;
+      --text-pearl: #f5f0ff;
+      --text-rose: #ffe4e1;
 
       --font-script: 'Great Vibes', cursive;
       --font-dance: 'Dancing Script', cursive;
       --font-serif: 'Playfair Display', serif;
-      --font-body: 'Roboto', sans-serif;
     }
 
     * { margin:0; padding:0; box-sizing:border-box; }
 
     body {
-      background: radial-gradient(circle at 30% 20%, #3a1a2f 0%, #0a0012 60%);
-      color: var(--text-luz);
-      font-family: var(--font-body);
+      background: linear-gradient(135deg, var(--bg-deep) 0%, var(--purple-dream) 50%, #180022 100%);
+      color: var(--text-pearl);
+      font-family: var(--font-serif);
       min-height: 100vh;
       overflow-x: hidden;
       position: relative;
     }
 
+    /* Breathing background glow */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at 70% 80%, rgba(255,51,102,0.12) 0%, transparent 50%);
+      background: radial-gradient(circle at 50% 40%, rgba(199,21,133,0.08) 0%, transparent 60%);
+      animation: breathe 24s ease-in-out infinite;
       pointer-events: none;
       z-index: 1;
-      animation: pulse-bg 18s infinite alternate;
     }
 
-    @keyframes pulse-bg {
-      0% { opacity: 0.4; transform: scale(1); }
-      100% { opacity: 0.7; transform: scale(1.15); }
+    @keyframes breathe {
+      0%,100% { opacity: 0.35; transform: scale(1); }
+      50%     { opacity: 0.65; transform: scale(1.12); }
     }
 
-    #particles { position:fixed; inset:0; pointer-events:none; z-index:0; }
+    #particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+    }
 
-    .heart, .petal, .star, .glow {
+    .particle {
       position: absolute;
-      user-select: none;
+      border-radius: 50%;
       pointer-events: none;
     }
 
-    .heart { color: var(--rose-vivo); font-size: 1.4rem; animation: rise-ex  linear forwards; text-shadow: 0 0 12px var(--rose-vivo); }
-    .petal  { color: var(--rose-suave); font-size: 1.8rem; animation: drift-ex linear forwards; }
-    .star   { color: var(--gold-brillo); font-size: 1.2rem; animation: shoot linear forwards; opacity: 0.9; }
-    .glow   { background: radial-gradient(circle, rgba(255,230,153,0.6) 10%, transparent 70%); border-radius:50%; animation: glow-pulse 4s infinite; pointer-events:none; }
+    .heart    { color: rgba(255,105,180,0.5); font-size: 1.6rem; animation: float-slow linear forwards; filter: drop-shadow(0 0 8px var(--rose-glow)); }
+    .petal    { color: var(--rose-soft); font-size: 2rem; animation: drift-slow linear forwards; }
+    .rose-glow{ background: radial-gradient(circle, rgba(212,175,55,0.4) 10%, transparent 70%); animation: pulse-glow 18s infinite ease-in-out; }
+    .sparkle  { color: var(--gold-light); font-size: 1.1rem; animation: twinkle 6s infinite; }
 
-    @keyframes rise-ex   { 0% { transform:translateY(0) rotate(0deg) scale(0.5); opacity:0; } 15%{opacity:0.9;} 100% { transform:translateY(-140vh) rotate(1080deg) scale(1.2); opacity:0; } }
-    @keyframes drift-ex  { 0% { transform:translate(0,0) rotate(0deg); opacity:0; } 12%{opacity:0.85;} 100% { transform:translate(calc(180px * var(--dx)), 140vh) rotate(calc(720deg * var(--rot))); opacity:0; } }
-    @keyframes shoot     { 0% { transform:translate(0,0) scale(1); opacity:1; } 100% { transform:translate(calc(400px * var(--sx)), calc(-400px * var(--sy))) scale(0.3); opacity:0; } }
-    @keyframes glow-pulse{ 0%,100% { transform:scale(1); opacity:0.5; } 50% { transform:scale(1.6); opacity:0.9; } }
+    @keyframes float-slow   { 0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; } 20% { opacity: 0.7; } 100% { transform: translateY(-130vh) rotate(720deg) scale(1.1); opacity: 0; } }
+    @keyframes drift-slow   { 0% { transform: translate(0,-10vh) rotate(0deg); opacity: 0; } 15% { opacity: 0.8; } 100% { transform: translate(calc(220px * var(--dx)), 130vh) rotate(calc(540deg * var(--rot))); opacity: 0; } }
+    @keyframes pulse-glow   { 0%,100% { transform: scale(1) rotate(0deg); opacity: 0.4; } 50% { transform: scale(1.4) rotate(3deg); opacity: 0.75; } }
+    @keyframes twinkle      { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
 
     .container {
-      max-width: 920px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 5vh 6vw;
+      padding: 6vh 5vw;
       position: relative;
-      z-index: 5;
+      z-index: 10;
     }
 
     section {
-      min-height: 90vh;
+      min-height: 95vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
       opacity: 0;
-      transform: translateY(60px) scale(0.92);
-      transition: all 2s cubic-bezier(0.16,1,0.3,1);
+      transform: translateY(50px);
+      transition: opacity 2.4s ease, transform 2.8s cubic-bezier(0.22,1,0.36,1);
     }
 
     section.visible {
       opacity: 1;
-      transform: none;
+      transform: translateY(0);
     }
 
-    .title-ex {
+    .hero-title {
       font-family: var(--font-dance);
-      font-size: clamp(5rem, 15vw, 10rem);
-      color: var(--rose-vivo);
-      text-shadow: 0 0 40px rgba(255,51,102,0.7), 0 0 80px rgba(255,51,102,0.4);
-      margin: 0.3em 0;
-      animation: shine 5s infinite alternate;
+      font-size: clamp(6rem, 16vw, 12rem);
+      color: transparent;
+      background: linear-gradient(90deg, var(--rose-glow), var(--gold-magic), var(--rose-glow));
+      -webkit-background-clip: text;
+      background-clip: text;
+      text-shadow: 0 0 40px rgba(212,175,55,0.5);
+      animation: title-shimmer 12s linear infinite;
+      margin-bottom: 0.4em;
     }
 
-    @keyframes shine {
-      0% { text-shadow: 0 0 30px var(--rose-vivo), 0 0 60px rgba(255,51,102,0.3); }
-      100% { text-shadow: 0 0 60px var(--rose-vivo), 0 0 120px rgba(255,51,102,0.6); }
+    @keyframes title-shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
     }
 
-    .subtitle-gold {
+    .subtitle {
       font-family: var(--font-serif);
-      font-weight: 800;
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      color: var(--gold-brillo);
-      letter-spacing: 6px;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--gold-light);
+      letter-spacing: 5px;
       text-transform: uppercase;
-      margin: 1rem 0 2rem;
-      text-shadow: 0 0 25px var(--gold-brillo);
+      margin: 1.5rem 0 2.5rem;
+      opacity: 0.9;
+      text-shadow: 0 0 20px var(--gold-magic);
     }
 
-    .typewriter {
+    .letter-text {
       font-family: var(--font-serif);
-      font-size: clamp(1.5rem, 4vw, 2.2rem);
-      line-height: 1.75;
+      font-size: clamp(1.4rem, 3.8vw, 1.9rem);
+      line-height: 1.9;
       max-width: 42em;
-      color: #fff8fb;
+      color: var(--text-rose);
       white-space: pre-wrap;
-      border-right: 4px solid var(--gold-brillo);
-      padding-right: 6px;
-      animation: blink-cursor 1.2s step-end infinite;
-      text-shadow: 0 0 15px rgba(255,255,255,0.6);
+      padding: 0 1rem;
+      border-left: 3px solid rgba(212,175,55,0.3);
+      background: rgba(15,0,25,0.25);
+      backdrop-filter: blur(4px);
+      border-radius: 12px;
+      box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
     }
 
-    @keyframes blink-cursor { 50% { border-color: transparent; } }
-
-    .btn-magic {
-      margin: 3rem 0 2rem;
-      padding: 1.2rem 3.5rem;
+    .btn-reveal {
+      margin: 3.5rem 0 2rem;
+      padding: 1.4rem 4rem;
       font-family: var(--font-dance);
-      font-size: 2.2rem;
-      color: #0a0012;
-      background: linear-gradient(45deg, var(--gold-brillo), var(--gold-suave));
+      font-size: 2.4rem;
+      color: #0e001a;
+      background: linear-gradient(135deg, var(--gold-magic), var(--gold-light));
       border: none;
       border-radius: 999px;
       cursor: pointer;
-      box-shadow: 0 0 40px rgba(255,215,0,0.7);
-      transition: all 0.5s cubic-bezier(0.175,0.885,0.32,1.275);
+      box-shadow: 0 0 50px rgba(212,175,55,0.6);
+      transition: all 0.8s cubic-bezier(0.34,1.56,0.64,1);
     }
 
-    .btn-magic:hover {
-      transform: scale(1.15) rotate(3deg);
-      box-shadow: 0 0 80px rgba(255,215,0,1);
-      background: linear-gradient(45deg, #fffacd, var(--gold-brillo));
+    .btn-reveal:hover {
+      transform: scale(1.12) translateY(-6px);
+      box-shadow: 0 0 90px rgba(212,175,55,0.9);
     }
 
-    .secret-poem {
+    .secret-text {
       font-family: var(--font-script);
-      font-size: clamp(3rem, 9vw, 5.5rem);
-      color: var(--rose-vivo);
+      font-size: clamp(3.2rem, 10vw, 6rem);
+      color: var(--rose-glow);
       opacity: 0;
-      transform: translateY(80px) scale(0.7);
-      transition: all 2.2s cubic-bezier(0.34,1.56,0.64,1);
-      max-width: 95%;
-      line-height: 1.2;
-      text-shadow: 0 0 35px rgba(255,51,102,0.8);
+      transform: scale(0.75) translateY(60px);
+      transition: all 3s cubic-bezier(0.23,1,0.32,1);
+      text-shadow: 0 0 50px rgba(199,21,133,0.7);
+      line-height: 1.15;
     }
 
-    .secret-poem.show {
+    .secret-text.show {
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: scale(1) translateY(0);
     }
 
-    .final-glow {
+    .final-message {
       font-family: var(--font-serif);
       font-style: italic;
-      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
-      line-height: 1.7;
-      color: var(--text-morado);
-      max-width: 40em;
-      margin-top: 2em;
-      text-shadow: 0 0 20px rgba(230,204,255,0.6);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.8;
+      color: var(--text-pearl);
+      max-width: 44em;
+      text-shadow: 0 0 30px rgba(244,164,96,0.5);
+      animation: final-glow 10s ease-in-out infinite alternate;
     }
 
-    .music-toggle {
+    @keyframes final-glow {
+      0%   { text-shadow: 0 0 20px rgba(212,175,55,0.4); }
+      100% { text-shadow: 0 0 60px rgba(212,175,55,0.8); }
+    }
+
+    .music-control {
       position: fixed;
-      bottom: 25px;
-      right: 25px;
+      bottom: 30px;
+      right: 30px;
       z-index: 100;
-      width: 60px;
-      height: 60px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255,51,102,0.3), rgba(0,0,0,0.6));
-      border: 2px solid var(--gold-brillo);
-      color: var(--gold-brillo);
-      font-size: 1.8rem;
+      background: rgba(15,0,25,0.6);
+      border: 2px solid var(--gold-magic);
+      color: var(--gold-light);
+      font-size: 1.9rem;
       display: grid;
       place-items: center;
       cursor: pointer;
-      transition: all 0.4s;
-      box-shadow: 0 0 30px rgba(255,215,0,0.5);
+      transition: all 0.5s;
+      box-shadow: 0 0 40px rgba(212,175,55,0.4);
+      backdrop-filter: blur(6px);
     }
 
-    .music-toggle:hover { transform: scale(1.2) rotate(15deg); background: var(--rose-vivo); color: white; }
-
-    #music-info {
-      position: fixed;
-      bottom: 25px;
-      left: 25px;
-      z-index: 100;
-      font-size: 0.9rem;
-      color: var(--gold-suave);
-      opacity: 0.8;
-      pointer-events: none;
+    .music-control.playing {
+      background: linear-gradient(135deg, var(--rose-glow), var(--gold-magic));
+      color: #0e001a;
+      animation: pulse-btn 4s infinite;
     }
 
-    @media (max-width: 600px) {
-      .title-ex { font-size: clamp(4rem, 18vw, 7.5rem); }
-      .secret-poem { font-size: clamp(2.5rem, 10vw, 4.2rem); }
-      .typewriter { font-size: 1.4rem; line-height: 1.6; }
+    @keyframes pulse-btn { 0%,100% { box-shadow: 0 0 30px rgba(212,175,55,0.5); } 50% { box-shadow: 0 0 70px rgba(212,175,55,1); } }
+
+    #music-note { position: fixed; bottom: 30px; left: 30px; color: var(--gold-light); font-size: 1rem; opacity: 0.75; pointer-events: none; }
+
+    @media (max-width: 640px) {
+      .hero-title { font-size: clamp(5rem, 20vw, 9rem); }
+      .secret-text { font-size: clamp(2.8rem, 12vw, 4.8rem); }
     }
   </style>
 </head>
@@ -226,172 +234,193 @@
 
 <div id="particles"></div>
 
-<!-- YouTube embed oculto para reproducir la playlist como fondo -->
-<iframe id="bg-music" width="0" height="0" 
-  src="https://www.youtube.com/embed/3N1Z2CBcXxo?autoplay=0&loop=1&playlist=3N1Z2CBcXxo&mute=0&enablejsapi=1" 
-  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- YouTube background music (Indila - Love Story) -->
+<iframe id="bg-music" width="0" height="0"
+  src="https://www.youtube.com/embed/63pTpAAF0HM?enablejsapi=1&autoplay=0&loop=1&playlist=63pTpAAF0HM&mute=0&controls=0&modestbranding=1&rel=0"
+  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
 
-<div class="music-toggle" id="btn-music">♪</div>
-<div id="music-info">Música: Laufey Playlist (sped up vibes) ♡</div>
+<div class="music-control" id="music-btn">♪</div>
+<div id="music-note">Indila – Love Story ♡</div>
 
 <div class="container">
 
   <section id="hero" class="visible">
-    <h1 class="title-ex">¡Mujer Maravillosa!</h1>
-    <h2 class="subtitle-gold">8 de Marzo 2026 – Día Internacional de la Mujer</h2>
-    <p style="font-size:1.4rem; opacity:0.9; margin-top:1rem;">Hoy el universo entero se inclina ante tu luz...</p>
+    <h1 class="hero-title">Nuestra Love Story</h1>
+    <h2 class="subtitle">8 de Marzo – Día de la Mujer Extraordinaria</h2>
+    <p style="font-size:1.5rem; opacity:0.85;">En cada nota, en cada latido… tú eres la protagonista eterna.</p>
   </section>
 
   <section id="letter">
-    <h2 class="subtitle-gold">Eres Mi Inspiración Eterna</h2>
-    <div class="typewriter" id="typed"></div>
+    <h2 class="subtitle">Mi carta para ti</h2>
+    <div class="letter-text" id="letter-typed"></div>
   </section>
 
-  <section id="secret">
-    <h2 class="subtitle-gold">Un Secreto Que Late Por Ti</h2>
-    <button class="btn-magic" id="btn-reveal">Toca si crees en el amor verdadero</button>
-    <div class="secret-poem" id="secret-text">
-      Eres la reina de mis sueños,<br>
-      la fuerza que mueve mis días,<br>
-      la poesía que nunca supe escribir...<br>
-      ¡Feliz Día de la Mujer, mi amor inmenso!
+  <section id="reveal">
+    <h2 class="subtitle">Un secreto que florece por ti</h2>
+    <button class="btn-reveal" id="reveal-btn">Abre si me sientes cerca</button>
+    <div class="secret-text" id="secret-msg">
+      Eres la rosa que nunca se marchita,<br>
+      el vals que bailo solo contigo en sueños,<br>
+      la luz dorada que atraviesa mi oscuridad.<br><br>
+      Feliz Día de la Mujer, mi amor,<br>
+      mi musa, mi reina, mi historia favorita.
     </div>
   </section>
 
-  <section id="ending">
-    <h1 class="title-ex">Siempre Tuyo</h1>
-    <p class="final-glow">
-      “Tu valentía ilumina el mundo,<br>
-      tu sonrisa conquista galaxias,<br>
-      tu corazón es mi hogar favorito.<br><br>
-      Gracias por ser tan poderosa, tan tierna, tan tú.<br>
-      ¡Eres imparable, eres magia, eres todo!”
+  <section id="final">
+    <h1 class="hero-title" style="font-size: clamp(5rem,14vw,9rem);">Siempre Tuyo</h1>
+    <p class="final-message">
+      “En un mundo de cuentos, tú eres el final feliz que siempre soñé.<br>
+      Tu fuerza es poesía, tu belleza es magia,<br>
+      tu corazón… mi hogar eterno.<br><br>
+      Gracias por existir, por brillar, por ser tú.”
     </p>
   </section>
 
 </div>
 
 <script>
-// Control de música (YouTube Player API simple)
-const musicFrame = document.getElementById('bg-music');
-const btnMusic = document.getElementById('btn-music');
-let isPlaying = false;
+// ── YouTube Player API + smooth control ───────
+let player;
+function onYouTubeIframeAPIReady() {
+  player = new YT.Player('bg-music', {
+    events: {
+      'onReady': onPlayerReady
+    }
+  });
+}
 
-btnMusic.onclick = () => {
+function onPlayerReady(event) {
+  // Ready – we'll control via button
+}
+
+const musicBtn = document.getElementById('music-btn');
+let isPlaying = false;
+let volume = 0;
+
+musicBtn.onclick = () => {
   if (isPlaying) {
-    musicFrame.src = musicFrame.src.replace('autoplay=1', 'autoplay=0');
-    btnMusic.textContent = '♪';
+    player.pauseVideo();
+    musicBtn.classList.remove('playing');
+    musicBtn.textContent = '♪';
   } else {
-    musicFrame.src = musicFrame.src.replace('autoplay=0', 'autoplay=1');
-    btnMusic.textContent = '❚❚';
+    player.playVideo();
+    musicBtn.classList.add('playing');
+    musicBtn.textContent = '❚❚';
+    // Fake smooth fade-in
+    let vol = 0;
+    const fade = setInterval(() => {
+      vol += 5;
+      player.setVolume(Math.min(vol, 70)); // ~70% max for background
+      if (vol >= 70) clearInterval(fade);
+    }, 400);
   }
   isPlaying = !isPlaying;
 };
 
-// Para forzar loop y autoplay al cargar (navegadores pueden bloquear autoplay sin interacción)
-window.addEventListener('click', () => {
-  if (!isPlaying) {
-    musicFrame.src = musicFrame.src.replace('autoplay=0', 'autoplay=1');
-    isPlaying = true;
-    btnMusic.textContent = '❚❚';
-  }
-}, { once: true });
+// Load API
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-// ── Observer para fade-in ───────
-const obs = new IntersectionObserver(ents => {
-  ents.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
-}, {threshold: 0.15});
-document.querySelectorAll("section").forEach(el => obs.observe(el));
+// ── Scroll observer ───────
+const observer = new IntersectionObserver(ents => {
+  ents.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.2 });
+document.querySelectorAll('section').forEach(s => observer.observe(s));
 
-// ── Typewriter ───────────
-const poema = 
-`Hoy celebro a la mujer que hace temblar mi mundo con solo mirarme.\n
-Eres fuerza disfrazada de ternura, coraje envuelto en caricias.\n
-Cada paso tuyo rompe cadenas invisibles, cada risa tuya enciende estrellas.\n
-Gracias por existir, por luchar, por amar con esa intensidad que me desarma.\n
-¡Eres la revolución más hermosa que he conocido!\n
-Feliz Día de la Mujer, mi reina, mi musa, mi todo. 💜✨`;
+// ── Typewriter for letter ───────
+const letterContent = `Cada vez que escucho esta melodía, pienso en ti.\n
+En cómo entraste en mi vida como una rosa inesperada en un jardín oscuro.\n
+Tu fuerza me inspira, tu sonrisa me salva, tu esencia me envuelve.\n
+Eres la mujer que hace que el mundo tenga sentido,\n
+la que convierte cada día en un verso digno de ser cantado.\n
+Gracias por ser tan valiente, tan hermosa, tan real.\n
+Te amo con toda la eternidad que cabe en un latido. 💞`;
+const letterEl = document.getElementById('letter-typed');
+let char = 0;
 
-const typed = document.getElementById("typed");
-let i = 0;
-function type() {
-  if (i < poema.length) {
-    typed.textContent += poema[i++];
-    setTimeout(type, 60 + Math.random()*40);
-  } else {
-    typed.style.borderRight = "none";
+function typeLetter() {
+  if (char < letterContent.length) {
+    letterEl.textContent += letterContent[char++];
+    setTimeout(typeLetter, 70 + Math.random() * 40);
   }
 }
-const obsLetter = new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) { type(); obsLetter.disconnect(); }
-}, {threshold: 0.5});
-obsLetter.observe(document.getElementById("letter"));
 
-// ── Reveal + explosión ──
-document.getElementById("btn-reveal").onclick = e => {
-  document.getElementById("secret-text").classList.add("show");
+const letterObs = new IntersectionObserver(([e]) => {
+  if (e.isIntersecting) {
+    typeLetter();
+    letterObs.disconnect();
+  }
+}, { threshold: 0.4 });
+letterObs.observe(document.getElementById('letter'));
+
+// ── Magical reveal burst ───────
+document.getElementById('reveal-btn').onclick = e => {
+  document.getElementById('secret-msg').classList.add('show');
 
   const rect = e.target.getBoundingClientRect();
-  const x = rect.left + rect.width/2;
-  const y = rect.top + rect.height/2;
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
 
-  for (let k = 0; k < 40; k++) {
-    const h = document.createElement("div");
-    h.className = "heart";
-    h.textContent = Math.random() > 0.3 ? "💖" : "❤️";
-    h.style.left = x + "px";
-    h.style.top  = y + "px";
-    h.style.fontSize = (18 + Math.random()*40) + "px";
-    document.body.appendChild(h);
+  for (let i = 0; i < 36; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle heart';
+    p.textContent = Math.random() > 0.4 ? '🌹' : '💞';
+    p.style.left = cx + 'px';
+    p.style.top = cy + 'px';
+    p.style.fontSize = (20 + Math.random() * 50) + 'px';
+    document.body.appendChild(p);
 
-    const ang = Math.random() * Math.PI * 2;
-    const d   = 180 + Math.random() * 400;
+    const angle = Math.random() * Math.PI * 2;
+    const dist = 200 + Math.random() * 450;
     setTimeout(() => {
-      h.style.transform = `translate(${Math.cos(ang)*d}px, ${Math.sin(ang)*d}px) scale(0.1) rotate(${Math.random()*720}deg)`;
-      h.style.opacity = 0;
-    }, 20);
-    setTimeout(() => h.remove(), 1800);
+      p.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) scale(0.2) rotate(${Math.random()*900}deg)`;
+      p.style.opacity = 0;
+    }, 50);
+    setTimeout(() => p.remove(), 3000);
   }
 };
 
-// ── Partículas ─────────────────
-const cont = document.getElementById("particles");
+// ── Background particles (slow & cinematic) ───────
+const particlesContainer = document.getElementById('particles');
 
-function spawn(type) {
-  const el = document.createElement("div");
-  el.className = type;
-  if (type === "heart") {
-    el.textContent = Math.random() > 0.4 ? "💞" : "💗";
-    el.style.left = Math.random()*100 + "vw";
-    el.style.animationDuration = (5 + Math.random()*8) + "s";
-  } else if (type === "petal") {
-    el.textContent = "✧";
-    el.style.left = Math.random()*100 + "vw";
-    el.style.setProperty("--dx", (Math.random() > 0.5 ? 1 : -1) * (60 + Math.random()*200));
-    el.style.setProperty("--rot", Math.random() > 0.5 ? 3 : -3);
-    el.style.animationDuration = (7 + Math.random()*10) + "s";
-  } else if (type === "star") {
-    el.textContent = "✨";
-    el.style.left = Math.random()*100 + "vw";
-    el.style.top  = Math.random()*40 + "vh";
-    el.style.setProperty("--sx", Math.random() > 0.5 ? 1 : -1);
-    el.style.setProperty("--sy", Math.random() > 0.5 ? 1 : -1);
-    el.style.animationDuration = (3 + Math.random()*4) + "s";
-  } else if (type === "glow") {
-    el.className = "glow";
-    el.style.left = Math.random()*100 + "vw";
-    el.style.top  = Math.random()*100 + "vh";
-    el.style.width = el.style.height = (80 + Math.random()*300) + "px";
-    el.style.animationDuration = (6 + Math.random()*8) + "s";
+function create(type) {
+  const el = document.createElement('div');
+  el.className = 'particle ' + type;
+  if (type === 'heart') {
+    el.textContent = '💗';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.animationDuration = (14 + Math.random() * 12) + 's';
+  } else if (type === 'petal') {
+    el.textContent = '❀';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.setProperty('--dx', (Math.random() > 0.5 ? 1 : -1) * (80 + Math.random() * 180));
+    el.style.setProperty('--rot', Math.random() > 0.5 ? 2 : -2);
+    el.style.animationDuration = (16 + Math.random() * 14) + 's';
+  } else if (type === 'rose-glow') {
+    el.className = 'particle rose-glow';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = Math.random() * 100 + 'vh';
+    el.style.width = el.style.height = (120 + Math.random() * 400) + 'px';
+    el.style.animationDuration = (20 + Math.random() * 15) + 's';
+  } else if (type === 'sparkle') {
+    el.className = 'particle sparkle';
+    el.textContent = '✨';
+    el.style.left = Math.random() * 100 + 'vw';
+    el.style.top = Math.random() * 80 + 'vh';
+    el.style.animationDelay = Math.random() * 5 + 's';
   }
-  cont.appendChild(el);
-  setTimeout(() => el.remove(), 20000);
+  particlesContainer.appendChild(el);
+  setTimeout(() => el.remove(), 40000);
 }
 
-setInterval(() => spawn("heart"), 280);
-setInterval(() => spawn("petal"), 450);
-setInterval(() => spawn("star"),  1200);
-setInterval(() => spawn("glow"),  3000);
+setInterval(() => create('heart'), 1200);
+setInterval(() => create('petal'), 1800);
+setInterval(() => create('rose-glow'), 4500);
+setInterval(() => create('sparkle'), 2200);
+
 </script>
 </body>
 </html>
