@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body { text-align:center; font-family:Arial; }
-button { width:200px; height:80px; font-size:25px; margin:10px; }
-</style>
+<meta charset="utf-8">
+<script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 </head>
 <body>
 
-<h1>CONTROL ROBOT VR</h1>
+<a-scene vr-mode-ui="enabled: true">
 
-<button onclick="connect()">Conectar</button><br><br>
+<a-entity camera look-controls position="0 1.6 3"></a-entity>
 
-<button onclick="send('F')">Adelante</button><br>
-<button onclick="send('B')">Atras</button><br>
-<button onclick="send('L')">Izquierda</button>
-<button onclick="send('R')">Derecha</button><br>
-<button onclick="send('S')" style="background:red;">STOP</button>
+<a-box position="-1 1 -3" color="green"
+       onclick="send('F')"></a-box>
+
+<a-box position="1 1 -3" color="blue"
+       onclick="send('B')"></a-box>
+
+<a-box position="-1 0 -3" color="yellow"
+       onclick="send('L')"></a-box>
+
+<a-box position="1 0 -3" color="orange"
+       onclick="send('R')"></a-box>
+
+<a-box position="0 -1 -3" color="red"
+       onclick="send('S')"></a-box>
+
+</a-scene>
 
 <script>
 let characteristic;
@@ -31,15 +39,10 @@ async function connect() {
   const server = await device.gatt.connect();
   const service = await server.getPrimaryService('1234');
   characteristic = await service.getCharacteristic('5678');
-
-  alert("Conectado al robot!");
 }
 
 function send(cmd) {
-  if (!characteristic) {
-    alert("No conectado");
-    return;
-  }
+  if (!characteristic) return;
   const encoder = new TextEncoder();
   characteristic.writeValue(encoder.encode(cmd));
 }
