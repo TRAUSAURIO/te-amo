@@ -1,426 +1,49 @@
 <!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mi Love Story – Para Ti, Mujer Eterna • 8 de Marzo</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --bg-deep: #0e001a;
-      --purple-dream: #2a0f3a;
-      --rose-soft: #c71585;
-      --rose-glow: #ff69b4;
-      --gold-magic: #d4af37;
-      --gold-light: #f0e68c;
-      --text-pearl: #f5f0ff;
-      --text-rose: #ffe4e1;
-
-      --font-script: 'Great Vibes', cursive;
-      --font-dance: 'Dancing Script', cursive;
-      --font-serif: 'Playfair Display', serif;
-    }
-
-    * { margin:0; padding:0; box-sizing:border-box; }
-
-    body {
-      background: linear-gradient(135deg, var(--bg-deep) 0%, var(--purple-dream) 50%, #180022 100%);
-      color: var(--text-pearl);
-      font-family: var(--font-serif);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
-
-    /* Breathing background glow */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(199,21,133,0.08) 0%, transparent 60%);
-      animation: breathe 24s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes breathe {
-      0%,100% { opacity: 0.35; transform: scale(1); }
-      50%     { opacity: 0.65; transform: scale(1.12); }
-    }
-
-    #particles {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 2;
-    }
-
-    .particle {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .heart    { color: rgba(255,105,180,0.5); font-size: 1.6rem; animation: float-slow linear forwards; filter: drop-shadow(0 0 8px var(--rose-glow)); }
-    .petal    { color: var(--rose-soft); font-size: 2rem; animation: drift-slow linear forwards; }
-    .rose-glow{ background: radial-gradient(circle, rgba(212,175,55,0.4) 10%, transparent 70%); animation: pulse-glow 18s infinite ease-in-out; }
-    .sparkle  { color: var(--gold-light); font-size: 1.1rem; animation: twinkle 6s infinite; }
-
-    @keyframes float-slow   { 0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; } 20% { opacity: 0.7; } 100% { transform: translateY(-130vh) rotate(720deg) scale(1.1); opacity: 0; } }
-    @keyframes drift-slow   { 0% { transform: translate(0,-10vh) rotate(0deg); opacity: 0; } 15% { opacity: 0.8; } 100% { transform: translate(calc(220px * var(--dx)), 130vh) rotate(calc(540deg * var(--rot))); opacity: 0; } }
-    @keyframes pulse-glow   { 0%,100% { transform: scale(1) rotate(0deg); opacity: 0.4; } 50% { transform: scale(1.4) rotate(3deg); opacity: 0.75; } }
-    @keyframes twinkle      { 0%,100% { opacity: 0.3; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.3); } }
-
-    .container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 6vh 5vw;
-      position: relative;
-      z-index: 10;
-    }
-
-    section {
-      min-height: 95vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 2.4s ease, transform 2.8s cubic-bezier(0.22,1,0.36,1);
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .hero-title {
-      font-family: var(--font-dance);
-      font-size: clamp(6rem, 16vw, 12rem);
-      color: transparent;
-      background: linear-gradient(90deg, var(--rose-glow), var(--gold-magic), var(--rose-glow));
-      -webkit-background-clip: text;
-      background-clip: text;
-      text-shadow: 0 0 40px rgba(212,175,55,0.5);
-      animation: title-shimmer 12s linear infinite;
-      margin-bottom: 0.4em;
-    }
-
-    @keyframes title-shimmer {
-      0%   { background-position: -200% 0; }
-      100% { background-position: 200% 0; }
-    }
-
-    .subtitle {
-      font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 5vw, 3rem);
-      color: var(--gold-light);
-      letter-spacing: 5px;
-      text-transform: uppercase;
-      margin: 1.5rem 0 2.5rem;
-      opacity: 0.9;
-      text-shadow: 0 0 20px var(--gold-magic);
-    }
-
-    .letter-text {
-      font-family: var(--font-serif);
-      font-size: clamp(1.4rem, 3.8vw, 1.9rem);
-      line-height: 1.9;
-      max-width: 42em;
-      color: var(--text-rose);
-      white-space: pre-wrap;
-      padding: 0 1rem;
-      border-left: 3px solid rgba(212,175,55,0.3);
-      background: rgba(15,0,25,0.25);
-      backdrop-filter: blur(4px);
-      border-radius: 12px;
-      box-shadow: inset 0 0 30px rgba(0,0,0,0.6);
-    }
-
-    .btn-reveal {
-      margin: 3.5rem 0 2rem;
-      padding: 1.4rem 4rem;
-      font-family: var(--font-dance);
-      font-size: 2.4rem;
-      color: #0e001a;
-      background: linear-gradient(135deg, var(--gold-magic), var(--gold-light));
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      box-shadow: 0 0 50px rgba(212,175,55,0.6);
-      transition: all 0.8s cubic-bezier(0.34,1.56,0.64,1);
-    }
-
-    .btn-reveal:hover {
-      transform: scale(1.12) translateY(-6px);
-      box-shadow: 0 0 90px rgba(212,175,55,0.9);
-    }
-
-    .secret-text {
-      font-family: var(--font-script);
-      font-size: clamp(3.2rem, 10vw, 6rem);
-      color: var(--rose-glow);
-      opacity: 0;
-      transform: scale(0.75) translateY(60px);
-      transition: all 3s cubic-bezier(0.23,1,0.32,1);
-      text-shadow: 0 0 50px rgba(199,21,133,0.7);
-      line-height: 1.15;
-    }
-
-    .secret-text.show {
-      opacity: 1;
-      transform: scale(1) translateY(0);
-    }
-
-    .final-message {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      line-height: 1.8;
-      color: var(--text-pearl);
-      max-width: 44em;
-      text-shadow: 0 0 30px rgba(244,164,96,0.5);
-      animation: final-glow 10s ease-in-out infinite alternate;
-    }
-
-    @keyframes final-glow {
-      0%   { text-shadow: 0 0 20px rgba(212,175,55,0.4); }
-      100% { text-shadow: 0 0 60px rgba(212,175,55,0.8); }
-    }
-
-    .music-control {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      z-index: 100;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: rgba(15,0,25,0.6);
-      border: 2px solid var(--gold-magic);
-      color: var(--gold-light);
-      font-size: 1.9rem;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      transition: all 0.5s;
-      box-shadow: 0 0 40px rgba(212,175,55,0.4);
-      backdrop-filter: blur(6px);
-    }
-
-    .music-control.playing {
-      background: linear-gradient(135deg, var(--rose-glow), var(--gold-magic));
-      color: #0e001a;
-      animation: pulse-btn 4s infinite;
-    }
-
-    @keyframes pulse-btn { 0%,100% { box-shadow: 0 0 30px rgba(212,175,55,0.5); } 50% { box-shadow: 0 0 70px rgba(212,175,55,1); } }
-
-    #music-note { position: fixed; bottom: 30px; left: 30px; color: var(--gold-light); font-size: 1rem; opacity: 0.75; pointer-events: none; }
-
-    @media (max-width: 640px) {
-      .hero-title { font-size: clamp(5rem, 20vw, 9rem); }
-      .secret-text { font-size: clamp(2.8rem, 12vw, 4.8rem); }
-    }
-  </style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body { text-align:center; font-family:Arial; }
+button { width:200px; height:80px; font-size:25px; margin:10px; }
+</style>
 </head>
 <body>
 
-<div id="particles"></div>
+<h1>CONTROL ROBOT VR</h1>
 
-<!-- YouTube background music (Indila - Love Story) -->
-<iframe id="bg-music" width="0" height="0"
-  src="https://www.youtube.com/embed/63pTpAAF0HM?enablejsapi=1&autoplay=0&loop=1&playlist=63pTpAAF0HM&mute=0&controls=0&modestbranding=1&rel=0"
-  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+<button onclick="connect()">Conectar</button><br><br>
 
-<div class="music-control" id="music-btn">♪</div>
-<div id="music-note">Indila – Love Story ♡</div>
-
-<div class="container">
-
-  <section id="hero" class="visible">
-    <h1 class="hero-title">Nuestra Love Story</h1>
-    <h2 class="subtitle">8 de Marzo – Día de la Mujer Extraordinaria</h2>
-    <p style="font-size:1.5rem; opacity:0.85;">En cada nota, en cada latido… tú eres la protagonista eterna.</p>
-  </section>
-
-  <section id="letter">
-    <h2 class="subtitle">Mi carta para ti</h2>
-    <div class="letter-text" id="letter-typed"></div>
-  </section>
-
-  <section id="reveal">
-    <h2 class="subtitle">Un secreto que florece por ti</h2>
-    <button class="btn-reveal" id="reveal-btn">Abre si me sientes cerca</button>
-    <div class="secret-text" id="secret-msg">
-      Eres la rosa que nunca se marchita,<br>
-      el vals que bailo solo contigo en sueños,<br>
-      la luz dorada que atraviesa mi oscuridad.<br><br>
-      Feliz Día de la Mujer, mi amor,<br>
-      mi musa, mi reina, mi historia favorita.
-    </div>
-  </section>
-
-  <section id="final">
-    <h1 class="hero-title" style="font-size: clamp(5rem,14vw,9rem);">Siempre Tuyo</h1>
-    <p class="final-message">
-      “En un mundo de cuentos, tú eres el final feliz que siempre soñé.<br>
-      Tu fuerza es poesía, tu belleza es magia,<br>
-      tu corazón… mi hogar eterno.<br><br>
-      Gracias por existir, por brillar, por ser tú.”
-    </p>
-  </section>
-
-</div>
+<button onclick="send('F')">Adelante</button><br>
+<button onclick="send('B')">Atras</button><br>
+<button onclick="send('L')">Izquierda</button>
+<button onclick="send('R')">Derecha</button><br>
+<button onclick="send('S')" style="background:red;">STOP</button>
 
 <script>
-// ── YouTube Player API + smooth control ───────
-let player;
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player('bg-music', {
-    events: {
-      'onReady': onPlayerReady
-    }
+let characteristic;
+
+async function connect() {
+  const device = await navigator.bluetooth.requestDevice({
+    filters: [{ name: 'ESP32_ROBOT' }],
+    optionalServices: ['1234']
   });
+
+  const server = await device.gatt.connect();
+  const service = await server.getPrimaryService('1234');
+  characteristic = await service.getCharacteristic('5678');
+
+  alert("Conectado al robot!");
 }
 
-function onPlayerReady(event) {
-  // Ready – we'll control via button
+function send(cmd) {
+  if (!characteristic) {
+    alert("No conectado");
+    return;
+  }
+  const encoder = new TextEncoder();
+  characteristic.writeValue(encoder.encode(cmd));
 }
-
-const musicBtn = document.getElementById('music-btn');
-let isPlaying = false;
-let volume = 0;
-
-musicBtn.onclick = () => {
-  if (isPlaying) {
-    player.pauseVideo();
-    musicBtn.classList.remove('playing');
-    musicBtn.textContent = '♪';
-  } else {
-    player.playVideo();
-    musicBtn.classList.add('playing');
-    musicBtn.textContent = '❚❚';
-    // Fake smooth fade-in
-    let vol = 0;
-    const fade = setInterval(() => {
-      vol += 5;
-      player.setVolume(Math.min(vol, 70)); // ~70% max for background
-      if (vol >= 70) clearInterval(fade);
-    }, 400);
-  }
-  isPlaying = !isPlaying;
-};
-
-// Load API
-const tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-const firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-// ── Scroll observer ───────
-const observer = new IntersectionObserver(ents => {
-  ents.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.2 });
-document.querySelectorAll('section').forEach(s => observer.observe(s));
-
-// ── Typewriter for letter ───────
-const letterContent = `Cada vez que escucho esta melodía, pienso en ti.\n
-En cómo entraste en mi vida como una rosa inesperada en un jardín oscuro.\n
-Tu fuerza me inspira, tu sonrisa me salva, tu esencia me envuelve.\n
-Eres la mujer que hace que el mundo tenga sentido,\n
-la que convierte cada día en un verso digno de ser cantado.\n
-Gracias por ser tan valiente, tan hermosa, tan real.\n
-Te amo con toda la eternidad que cabe en un latido. 💞`;
-const letterEl = document.getElementById('letter-typed');
-let char = 0;
-
-function typeLetter() {
-  if (char < letterContent.length) {
-    letterEl.textContent += letterContent[char++];
-    setTimeout(typeLetter, 70 + Math.random() * 40);
-  }
-}
-
-const letterObs = new IntersectionObserver(([e]) => {
-  if (e.isIntersecting) {
-    typeLetter();
-    letterObs.disconnect();
-  }
-}, { threshold: 0.4 });
-letterObs.observe(document.getElementById('letter'));
-
-// ── Magical reveal burst ───────
-document.getElementById('reveal-btn').onclick = e => {
-  document.getElementById('secret-msg').classList.add('show');
-
-  const rect = e.target.getBoundingClientRect();
-  const cx = rect.left + rect.width / 2;
-  const cy = rect.top + rect.height / 2;
-
-  for (let i = 0; i < 36; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle heart';
-    p.textContent = Math.random() > 0.4 ? '🌹' : '💞';
-    p.style.left = cx + 'px';
-    p.style.top = cy + 'px';
-    p.style.fontSize = (20 + Math.random() * 50) + 'px';
-    document.body.appendChild(p);
-
-    const angle = Math.random() * Math.PI * 2;
-    const dist = 200 + Math.random() * 450;
-    setTimeout(() => {
-      p.style.transform = `translate(${Math.cos(angle)*dist}px, ${Math.sin(angle)*dist}px) scale(0.2) rotate(${Math.random()*900}deg)`;
-      p.style.opacity = 0;
-    }, 50);
-    setTimeout(() => p.remove(), 3000);
-  }
-};
-
-// ── Background particles (slow & cinematic) ───────
-const particlesContainer = document.getElementById('particles');
-
-function create(type) {
-  const el = document.createElement('div');
-  el.className = 'particle ' + type;
-  if (type === 'heart') {
-    el.textContent = '💗';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.animationDuration = (14 + Math.random() * 12) + 's';
-  } else if (type === 'petal') {
-    el.textContent = '❀';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.setProperty('--dx', (Math.random() > 0.5 ? 1 : -1) * (80 + Math.random() * 180));
-    el.style.setProperty('--rot', Math.random() > 0.5 ? 2 : -2);
-    el.style.animationDuration = (16 + Math.random() * 14) + 's';
-  } else if (type === 'rose-glow') {
-    el.className = 'particle rose-glow';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.top = Math.random() * 100 + 'vh';
-    el.style.width = el.style.height = (120 + Math.random() * 400) + 'px';
-    el.style.animationDuration = (20 + Math.random() * 15) + 's';
-  } else if (type === 'sparkle') {
-    el.className = 'particle sparkle';
-    el.textContent = '✨';
-    el.style.left = Math.random() * 100 + 'vw';
-    el.style.top = Math.random() * 80 + 'vh';
-    el.style.animationDelay = Math.random() * 5 + 's';
-  }
-  particlesContainer.appendChild(el);
-  setTimeout(() => el.remove(), 40000);
-}
-
-setInterval(() => create('heart'), 1200);
-setInterval(() => create('petal'), 1800);
-setInterval(() => create('rose-glow'), 4500);
-setInterval(() => create('sparkle'), 2200);
-
 </script>
+
 </body>
 </html>
